@@ -29,6 +29,7 @@ Auth::routes(['register' => false]);
 route::get('/' , [FrontviewController::class , 'index'])->name('index');
 route::get('/category/{slug}/{id}' , [FrontviewController::class , 'web_category'])->name('web.category');
 route::get('/singlepost/{id}' , [SinglePostController::class , 'single_post'])->name('web.single.post');
+route::post('/singlepost/comment/{id}' , [SinglePostController::class , 'single_post_comment'])->name('web.single.post.comment');
 
 
 

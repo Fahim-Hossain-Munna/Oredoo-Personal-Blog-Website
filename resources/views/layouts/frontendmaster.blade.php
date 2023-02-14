@@ -217,6 +217,8 @@
 <!-- JS main  -->
 <script src="{{ asset('blog_assets') }}/assets/js/main.js"></script>
 
+@yield('footer_script')
+
 
 </body>
 </html>

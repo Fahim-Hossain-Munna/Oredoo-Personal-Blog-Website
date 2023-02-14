@@ -145,95 +145,79 @@
                             <!--post-single-comments-->
                             <div class="post-single-comments">
                                 <!--Comments-->
-                                <h4 >3 Comments</h4>
+                                <h4 >{{ $show_comments->count() }} Comments</h4>
                                 <ul class="comments">
                                     <!--comment1-->
-                                    <li class="comment-item pt-0">
-                                        <img src="assets/img/other/user1.jpg" alt="">
-                                        <div class="content">
-                                            <div class="meta">
-                                                <ul class="list-inline">
-                                                    <li><a href="#">Nirmaine Nicole</a> </li>
-                                                    <li class="slash"></li>
-                                                    <li>3 Months Ago</li>
-                                                </ul>
+                                    @forelse ($show_comments as $comment)
+                                        <li class="comment-item pt-3 pb-3">
+                                            <img src="{{ asset('user_default_picture/default.jpg') }}" alt="">
+                                            <div class="content">
+                                                <div class="meta">
+                                                    <ul class="list-inline">
+                                                        <li><a href="#">{{ $comment->name }}</a> </li>
+                                                        <li class="slash"></li>
+                                                        <li>{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</li>
+                                                    </ul>
+                                                </div>
+                                                <p>
+                                                    {{ $comment->comment }}
+                                                </p>
+                                                <a href="#" class="btn-reply"><i class="las la-reply"></i> Edit</a>
                                             </div>
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus at doloremque adipisci eum placeat
-                                                quod non fugiat aliquid sit similique!
-                                            </p>
-                                            <a href="#" class="btn-reply"><i class="las la-reply"></i> Reply</a>
-                                        </div>
 
-                                    </li>
-                                    <!--comment2-->
-                                    <li class="comment-item">
-                                        <img src="assets/img/other/use2.jpg" alt="">
-                                        <div class="content">
-                                            <div class="meta">
-                                                <ul class="list-inline">
-                                                    <li><a href="#">adam smith</a> </li>
-                                                    <li class="slash"></li>
-                                                    <li>3 Months Ago</li>
-                                                </ul>
-                                            </div>
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus at doloremque adipisci eum placeat
-                                                quod non fugiat aliquid sit similique!
-                                            </p>
-                                            <a href="#" class="btn-reply"><i class="las la-reply"></i> Reply</a>
-                                        </div>
-                                    </li>
-                                       <!--comment3-->
-                                    <li class="comment-item">
-                                        <img src="assets/img/other/user3.jpg" alt="">
-                                        <div class="content">
-                                            <div class="meta">
-                                                <ul class="list-inline">
-                                                    <li><a href="#">Emma david</a> </li>
-                                                    <li class="slash"></li>
-                                                    <li>3 Months Ago</li>
-                                                </ul>
-                                            </div>
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus at doloremque adipisci eum placeat
-                                                quod non fugiat aliquid sit similique!
-                                            </p>
-                                            <a href="#" class="btn-reply"><i class="las la-reply"></i> Reply</a>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @empty
+
+                                    @endforelse
 
                                 </ul>
                                 <!--Leave-comments-->
                                 <div class="comments-form">
                                     <h4 >Leave a Reply</h4>
                                     <!--form-->
-                                    <form class="form " action="#" method="POST" id="main_contact_form">
+                                    <form class="form" action="{{ route('web.single.post.comment',$single_post->id) }}" method="POST" id="main_contact_form">
+                                        @csrf
                                         <p>Your email adress will not be published ,Requied fileds are marked*.</p>
-                                        <div class="alert alert-success contact_msg" style="display: none" role="alert">
-                                            Your message was sent successfully.
-                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name*" required="required">
+                                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Name*">
+                                                    @error('name')
+                                                         <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                          </div>
+                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email*" required="required">
+                                                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email*">
+                                                    @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                      </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Message*" required="required"></textarea>
+                                                    <textarea name="comment" id="message" cols="30" rows="5" class="form-control @error('comment') is-invalid @enderror" placeholder="Message*"></textarea>
+                                                    @error('comment')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                      </div>
+                                                    @enderror
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12">
+                                            {{-- <div class="col-lg-12">
                                                 <div class="mb-20">
-                                                    <input name="name" type="checkbox" value="1" required="required">
-                                                    <label for="name"><span>save my name , email and website in this browser for the next time I comment.</span></label>
-                                                </div>
+                                                    <input type="checkbox" value="1" required="required">
+                                                    <label for="name"><span>i agree what i write</span></label>
+                                                </div> --}}
 
-                                                <button type="submit" name="submit" class="btn-custom">
+                                                <button type="submit" class="btn-custom">
                                                     Send Comment
                                                 </button>
                                             </div>
@@ -248,5 +232,32 @@
         </div>
     </section>
 
+
+@endsection
+
+@section('footer_script')
+
+@if (session('comment_done_msg'))
+
+<script>
+    const Toast = Swal.mixin({
+toast: true,
+position: 'top-end',
+showConfirmButton: false,
+timer: 3000,
+timerProgressBar: true,
+didOpen: (toast) => {
+  toast.addEventListener('mouseenter', Swal.stopTimer)
+  toast.addEventListener('mouseleave', Swal.resumeTimer)
+}
+})
+
+Toast.fire({
+icon: 'success',
+title: '{{ session('comment_done_msg') }}'
+})
+</script>
+
+@endif
 
 @endsection
