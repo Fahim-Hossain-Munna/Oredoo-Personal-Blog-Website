@@ -45,12 +45,12 @@
                     <nav class="navbar">
                         <!--navbar-collapse-->
                         <div class="collapse navbar-collapse" id="main_nav">
-                            <ul class="navbar-nav ">
-                                <li class="nav-item ">
-                                    <a class="nav-link active" href="{{ route('index') }}"> Home </a>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('index') }}"> Home </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="blog.html"> Blogs </a>
+                                    <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('web.blog') }}"> Blogs </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="author.html"> Authors </a>
@@ -128,16 +128,20 @@
                                 <p>Sign up for free and be the first to get notified about new posts.</p>
                             </div>
 
-                            <form action="#" class="newslettre-form">
+                            <form action="{{ route('subscriber') }}" class="newslettre-form" method="POST">
+                                @csrf
                                 <div class="form-flex">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Your Email Adress"
-                                            required="required">
+                                        <input type="email" name="email_newslatter" class="form-control @error('email_newslatter') is-invalid @enderror" placeholder="Your Email Adress">
                                     </div>
                                     <button class="submit-btn" type="submit">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
+
                                 </div>
+                                @error('email_newslatter')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </form>
                         </div>
                     </div>
@@ -162,7 +166,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright">
-                            <p>© 2022, AssiaGroupe, All Rights Reserved.</p>
+                            <p>© {{ now()->format('Y') }}, Fahim Hossain Munna , All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>
@@ -216,9 +220,55 @@
 
 <!-- JS main  -->
 <script src="{{ asset('blog_assets') }}/assets/js/main.js"></script>
+{{-- sweetalert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @yield('footer_script')
 
+@if (session('subscribe_once'))
+
+<script>
+    const Toast = Swal.mixin({
+toast: true,
+position: 'top-end',
+showConfirmButton: false,
+timer: 3000,
+timerProgressBar: true,
+didOpen: (toast) => {
+  toast.addEventListener('mouseenter', Swal.stopTimer)
+  toast.addEventListener('mouseleave', Swal.resumeTimer)
+}
+})
+
+Toast.fire({
+icon: 'success',
+title: '{{ session('subscribe_once') }}'
+})
+</script>
+
+@endif
+@if (session('subscribe_done'))
+
+<script>
+    const Toast = Swal.mixin({
+toast: true,
+position: 'top-end',
+showConfirmButton: false,
+timer: 3000,
+timerProgressBar: true,
+didOpen: (toast) => {
+  toast.addEventListener('mouseenter', Swal.stopTimer)
+  toast.addEventListener('mouseleave', Swal.resumeTimer)
+}
+})
+
+Toast.fire({
+icon: 'success',
+title: '{{ session('subscribe_done') }}'
+})
+</script>
+
+@endif
 
 </body>
 </html>

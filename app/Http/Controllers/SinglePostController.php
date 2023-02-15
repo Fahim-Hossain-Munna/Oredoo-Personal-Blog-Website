@@ -32,4 +32,9 @@ class SinglePostController extends Controller
 
          return back()->with('comment_done_msg' , 'Your comment was apply successfully');
     }
+
+    public function single_post_comment_delete($id){
+         SinglePostComment::findOrFail($id)->delete();
+         return back()->with('comment_delete','Your comment was delete successfully');
+    }
 }

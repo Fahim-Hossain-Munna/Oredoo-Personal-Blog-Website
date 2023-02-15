@@ -150,7 +150,11 @@
                                     <!--comment1-->
                                     @forelse ($show_comments as $comment)
                                         <li class="comment-item pt-3 pb-3">
-                                            <img src="{{ asset('user_default_picture/default.jpg') }}" alt="">
+                                            @auth
+                                                <img src="{{ asset('profile_image_user') }}/{{ auth()->user()->user_photo }}" alt="">
+                                                @else
+                                                <img src="{{ asset('user_default_picture/default.jpg') }}" alt="">
+                                            @endauth
                                             <div class="content">
                                                 <div class="meta">
                                                     <ul class="list-inline">
@@ -162,7 +166,10 @@
                                                 <p>
                                                     {{ $comment->comment }}
                                                 </p>
-                                                <a href="#" class="btn-reply"><i class="las la-reply"></i> Edit</a>
+                                                <form action="{{ route('web.single.post.comment.delete',$comment->id) }}" method="POST">
+                                                    @csrf
+                                                <i class="las la-reply"></i><button class="btn-reply" style="background: transparent;">Delete</button>
+                                                </form>
                                             </div>
 
                                         </li>
@@ -255,6 +262,28 @@ didOpen: (toast) => {
 Toast.fire({
 icon: 'success',
 title: '{{ session('comment_done_msg') }}'
+})
+</script>
+
+@endif
+@if (session('comment_delete'))
+
+<script>
+    const Toast = Swal.mixin({
+toast: true,
+position: 'top-end',
+showConfirmButton: false,
+timer: 3000,
+timerProgressBar: true,
+didOpen: (toast) => {
+  toast.addEventListener('mouseenter', Swal.stopTimer)
+  toast.addEventListener('mouseleave', Swal.resumeTimer)
+}
+})
+
+Toast.fire({
+icon: 'success',
+title: '{{ session('comment_delete') }}'
 })
 </script>
 

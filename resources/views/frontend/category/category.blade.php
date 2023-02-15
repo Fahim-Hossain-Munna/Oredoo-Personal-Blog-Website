@@ -41,7 +41,16 @@
                                 <li class="post-date"> <span class="line"></span> publish date, {{ $post->blog_publish_date }}</li>
                             </ul>
                             <div class="post-exerpt">
-                                <p><?php echo $post->blog_short_description ?></p>
+                                <?php
+                                $blog_des = strip_tags($post->blog_short_description);
+                                if(strlen($blog_des > 200)):
+                                    $blog_cut = substr($blog_des,0,200);
+                                    $endpoint = strrpos($blog_cut, " ");
+                                    $blog_des = $endpoint?substr($blog_cut,0,$endpoint):substr($blog_cut,0);
+                                    $blog_des .=".....  <a href='#' class='text-info fw-bold'>Read More</a>";
+                                endif;
+                                echo $blog_des;
+                                ?></p>
                             </div>
                             <div class="post-btn">
                                 <a href="{{ route('web.single.post',$post->id) }}" class="btn-read-more">Continue Reading <i class="las la-long-arrow-alt-right"></i></a>

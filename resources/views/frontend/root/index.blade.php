@@ -79,242 +79,59 @@
                         </div>
 
                         <!--post1-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/31.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">Branding</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">Brand is just a perception, and perception will match
-                                        reality</a>
-                                </h5>
+                        @forelse ($all_blogs as $blog)
+                            <div class="post-list post-list-style4">
+                                <div class="post-list-image">
+                                    <a href="{{ route('web.single.post',$blog->id) }}">
+                                        <img src="{{ asset('blog_images') }}/{{ $blog->blog_title_image }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="post-list-content">
+                                    <ul class="entry-meta">
+                                        <li class="entry-cat">
+                                            <a href="{{ route('web.category',[ $blog->RelationWithCategory->category_slug , $blog->RelationWithCategory->id]) }}" class="category-style-1">{{ $blog->RelationWithCategory->category_name }}</a>
+                                        </li>
+                                        <li class="post-date"> <span class="line"></span>Publish Date : {{ $blog->blog_publish_date }}</li>
+                                    </ul>
+                                    <h5 class="entry-title">
+                                        <p>
+                                            <?php
+                                                $blog_des = strip_tags($blog->blog_short_description);
+                                                $blog_id = $blog->id;
+                                                if(strlen($blog_des > 80)):
+                                                    $blog_cut = substr($blog_des,0,80);
+                                                    $endpoint = strrpos($blog_cut, " ");
+                                                    $blog_des = $endpoint?substr($blog_cut,0,$endpoint):substr($blog_cut,0);
+                                                    $blog_des .=".....  <a href='#' class='text-info fw-bold'>Read More</a>";
+                                                endif;
+                                                echo $blog_des;
+                                            ?></p>
+                                    </h5>
 
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
+                                    <div class="post-btn">
+                                        <a href="{{ route('web.single.post',$blog->id) }}" class="btn-read-more">Continue Reading <i
+                                                class="las la-long-arrow-alt-right"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!--post2-->
+                        @empty
                         <div class="post-list post-list-style4">
                             <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/21.jpg" alt="">
+                                <a href="#">
+                                    <img src="" alt="no image">
                                 </a>
                             </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">marketing</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
                                 <h5 class="entry-title">
-                                    <a href="post-single.html">Ignoring online marketing is like opening a business but
-                                        not telling anyone</a>
+                                    <a href="post-single.html">No Post Found</a>
                                 </h5>
-
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
                             </div>
                         </div>
-
-                        <!--post3-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/32.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">livestyle</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">Your genetics load the gun your lifestyle pulls the
-                                        trigger.</a>
-                                </h5>
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--post4-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/17.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">food</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">Food is symbolic of love when words are inadequate</a>
-                                </h5>
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--post5-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/27.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">interior</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">A room is not a room without natural light</a>
-                                </h5>
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--post6-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/39.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">design</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">Everything is designed. Few things are designed well.</a>
-                                </h5>
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--post7-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/30.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">design</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">The function of design is letting design function</a>
-                                </h5>
-
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--post7-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/25.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">interior</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">The best rooms have something to say about the people who
-                                        live in them.</a>
-                                </h5>
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--post8-->
-                        <div class="post-list post-list-style4">
-                            <div class="post-list-image">
-                                <a href="post-single.html">
-                                    <img src="assets/img/blog/22.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="post-list-content">
-                                <ul class="entry-meta">
-                                    <li class="entry-cat">
-                                        <a href="blog-layout-1.html" class="category-style-1">marketing</a>
-                                    </li>
-                                    <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                                </ul>
-                                <h5 class="entry-title">
-                                    <a href="post-single.html">The best marketing doesn't feel like marketing</a>
-                                </h5>
-
-                                <div class="post-btn">
-                                    <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                            class="las la-long-arrow-alt-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
+                        @endforelse
                         <!--pagination-->
                         <div class="pagination">
                             <div class="pagination-area">
-                                <div class="pagination-list">
-                                    <ul class="list-inline">
-                                        <li><a href="#"><i class="las la-arrow-left"></i></a></li>
-                                        <li><a href="#" class="active">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#"><i class="las la-arrow-right"></i></a></li>
-                                    </ul>
-                                </div>
+                                {{$all_blogs->links()}}
                             </div>
                         </div>
                     </div>
@@ -340,79 +157,40 @@
                             <!--popular-posts-->
                             <div class="widget">
                                 <div class="widget-title">
-                                    <h5>popular Posts</h5>
+                                    <h5>Random Posts</h5>
                                 </div>
 
                                 <ul class="widget-popular-posts">
                                     <!--post1-->
-                                    <li class="small-post">
-                                        <div class="small-post-image">
-                                            <a href="post-single.html">
-                                                <img src="assets/img/blog/1.jpg" alt="">
-                                                <small class="nb">1</small>
-                                            </a>
-                                        </div>
-                                        <div class="small-post-content">
-                                            <p>
-                                                <a href="post-single.html">Everything is designed. Few things are
-                                                    designed well.</a>
-                                            </p>
-                                            <small> <span class="slash"></span>3 mounth ago</small>
-                                        </div>
-                                    </li>
+                                    @forelse ($latest_posts as $post)
+                                        <li class="small-post">
+                                            <div class="small-post-image">
+                                                <a href="post-single.html">
+                                                    <img src="{{ asset('blog_images') }}/{{ $post->blog_title_image }}" alt="">
+                                                    <small class="nb">{{ $loop->index+1 }}</small>
+                                                </a>
+                                            </div>
+                                            <div class="small-post-content">
+                                                <p>
+                                                    <a href="{{ route('web.single.post',$post->id) }}">
+                                                        <?php
+                                                            $blog_des = strip_tags($post->blog_short_description);
+                                                            if(strlen($blog_des > 50)):
+                                                                $blog_cut = substr($blog_des,0,50);
+                                                                $endpoint = strrpos($blog_cut, " ");
+                                                                $blog_des = $endpoint?substr($blog_cut,0,$endpoint):substr($blog_cut,0);
+                                                                $blog_des .=".....";
+                                                            endif;
+                                                            echo $blog_des;
+                                                        ?>
+                                                    </a>
+                                                </p>
+                                                <small> <span class="slash"></span>{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                                            </div>
+                                        </li>
+                                    @empty
 
-                                    <!--post2-->
-                                    <li class="small-post">
-                                        <div class="small-post-image">
-                                            <a href="post-single.html">
-                                                <img src="assets/img/blog/5.jpg" alt="">
-                                                <small class="nb">2</small>
-                                            </a>
-                                        </div>
-                                        <div class="small-post-content">
-                                            <p>
-                                                <a href="post-single.html">Brand yourself for the career you want, not
-                                                    the job you </a>
-                                            </p>
-                                            <small> <span class="slash"></span> 3 mounth ago</small>
-                                        </div>
-                                    </li>
-
-                                    <!--post3-->
-                                    <li class="small-post">
-                                        <div class="small-post-image">
-                                            <a href="post-single.html">
-                                                <img src="assets/img/blog/13.jpg" alt="">
-                                                <small class="nb">3</small>
-
-                                            </a>
-                                        </div>
-                                        <div class="small-post-content">
-                                            <p>
-                                                <a href="post-single.html">It’s easier to ask forgiveness than it is to
-                                                    get permission.</a>
-                                            </p>
-                                            <small> <span class="slash"></span>3 mounth ago</small>
-                                        </div>
-                                    </li>
-
-                                    <!--post4-->
-                                    <li class="small-post">
-                                        <div class="small-post-image">
-                                            <a href="post-single.html">
-                                                <img src="assets/img/blog/16.jpg" alt="">
-                                                <small class="nb">4</small>
-                                            </a>
-                                        </div>
-                                        <div class="small-post-content">
-                                            <p>
-                                                <a href="post-single.html">All happiness depends on a leisurely
-                                                    breakfast</a>
-                                            </p>
-                                            <small> <span class="slash"></span>
-                                                3 mounth ago</small>
-                                        </div>
-                                    </li>
+                                    @endforelse
                                 </ul>
                             </div>
 
@@ -420,12 +198,15 @@
                             <div class="widget widget-newsletter">
                                 <h5>Subscribe To Our Newsletter</h5>
                                 <p>No spam, notifications only about new products, updates.</p>
-                                <form action="#" class="newslettre-form">
+                                <form action="{{ route('subscriber') }}" class="newslettre-form" method="POST">
+                                    @csrf
                                     <div class="form-flex">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email Adress"
-                                                required="required">
+                                            <input type="email" name="email_newslatter" class="form-control @error('email_newslatter') is-invalid @enderror" placeholder="Your Email Adress" >
                                         </div>
+                                        @error('email_newslatter')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <button class="btn-custom" type="submit">Subscribe now</button>
                                     </div>
                                 </form>

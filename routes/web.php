@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController};
+use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -27,9 +27,14 @@ Auth::routes(['register' => false]);
 
 // front view and mannagement part
 route::get('/' , [FrontviewController::class , 'index'])->name('index');
+route::get('/blog' , [FrontviewController::class , 'web_blog'])->name('web.blog');
+
+// category and blog related
 route::get('/category/{slug}/{id}' , [FrontviewController::class , 'web_category'])->name('web.category');
 route::get('/singlepost/{id}' , [SinglePostController::class , 'single_post'])->name('web.single.post');
 route::post('/singlepost/comment/{id}' , [SinglePostController::class , 'single_post_comment'])->name('web.single.post.comment');
+route::post('/singlepost/comment/delete/{id}' , [SinglePostController::class , 'single_post_comment_delete'])->name('web.single.post.comment.delete');
+route::post('/subscriber' , [subscriberController::class , 'subscriber'])->name('subscriber');
 
 
 
