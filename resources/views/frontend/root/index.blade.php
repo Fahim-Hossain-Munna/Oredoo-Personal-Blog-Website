@@ -147,9 +147,9 @@
                                     <h5>Search</h5>
                                 </div>
                                 <div class=" widget-search">
-                                    <form action="https://oredoo.assiagroupe.net/Oredoo/search.html">
-                                        <input type="search" id="gsearch" name="gsearch" placeholder="Search ....">
-                                        <a href="search.html" class="btn-submit"><i class="las la-search"></i></a>
+                                    <form action="{{ route('web.search') }}">
+                                        <input type="search" id="gsearch" name="websearch" placeholder="Search ....">
+                                        <button type="submit" class="btn-submit"><i class="las la-search"></i></button>
                                     </form>
                                 </div>
                             </div>

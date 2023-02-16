@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController};
+use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController, WebSearchController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -28,6 +28,7 @@ Auth::routes(['register' => false]);
 // front view and mannagement part
 route::get('/' , [FrontviewController::class , 'index'])->name('index');
 route::get('/blog' , [FrontviewController::class , 'web_blog'])->name('web.blog');
+route::get('/search' , [WebSearchController::class , 'web_search'])->name('web.search');
 
 // category and blog related
 route::get('/category/{slug}/{id}' , [FrontviewController::class , 'web_category'])->name('web.category');

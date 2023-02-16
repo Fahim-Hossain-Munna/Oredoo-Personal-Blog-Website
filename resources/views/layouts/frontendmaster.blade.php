@@ -192,9 +192,9 @@
                     <button type="button" class="close">
                         <i class="far fa-times"></i>
                     </button>
-                    <form class="search-form" action="https://oredoo.assiagroupe.net/Oredoo/search.html">
-                        <input type="search" value="" placeholder="What are you looking for?">
-                        <button type="submit" class="search-btn"> search</button>
+                    <form class="search-form" action="{{ route('web.search') }}">
+                        <input type="search" value="" placeholder="What are you looking for?" name="websearch">
+                        <button type="submit" class="search-btn">search</button>
                     </form>
                 </div>
             </div>
@@ -265,6 +265,28 @@ didOpen: (toast) => {
 Toast.fire({
 icon: 'success',
 title: '{{ session('subscribe_done') }}'
+})
+</script>
+
+@endif
+@if (session('failed_search'))
+
+<script>
+    const Toast = Swal.mixin({
+toast: true,
+position: 'top-end',
+showConfirmButton: false,
+timer: 3000,
+timerProgressBar: true,
+didOpen: (toast) => {
+  toast.addEventListener('mouseenter', Swal.stopTimer)
+  toast.addEventListener('mouseleave', Swal.resumeTimer)
+}
+})
+
+Toast.fire({
+icon: 'error',
+title: '{{ session('failed_search') }}'
 })
 </script>
 
