@@ -24,4 +24,10 @@ class FrontviewController extends Controller
         $all_blogs = Blogpost::latest()->paginate(5);
         return view('frontend.blog.index',compact('all_blogs'));
     }
+    public function web_contact(){
+        return view('frontend.contact.index');
+    }
+    public function web_contact_insert(Request $request){
+        return $request;
+    }
 }

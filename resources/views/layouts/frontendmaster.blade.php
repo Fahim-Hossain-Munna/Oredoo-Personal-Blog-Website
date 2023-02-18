@@ -53,14 +53,16 @@
                                     <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('web.blog') }}"> Blogs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="author.html"> Authors </a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="about.html"> About </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html"> Contact </a>
+                                    <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('web.contact') }}" href="contact.html"> Contact </a>
                                 </li>
+                                @auth
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="author.html"> Authors </a>
+                                    </li>
+                                @endauth
                             </ul>
                         </div>
                         <!--/-->

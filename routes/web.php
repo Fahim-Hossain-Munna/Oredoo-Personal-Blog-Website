@@ -29,6 +29,7 @@ Auth::routes(['register' => false]);
 route::get('/' , [FrontviewController::class , 'index'])->name('index');
 route::get('/blog' , [FrontviewController::class , 'web_blog'])->name('web.blog');
 route::get('/search' , [WebSearchController::class , 'web_search'])->name('web.search');
+route::get('/contact' , [FrontviewController::class , 'web_contact'])->name('web.contact');
 
 // category and blog related
 route::get('/category/{slug}/{id}' , [FrontviewController::class , 'web_category'])->name('web.category');
@@ -36,6 +37,7 @@ route::get('/singlepost/{id}' , [SinglePostController::class , 'single_post'])->
 route::post('/singlepost/comment/{id}' , [SinglePostController::class , 'single_post_comment'])->name('web.single.post.comment');
 route::post('/singlepost/comment/delete/{id}' , [SinglePostController::class , 'single_post_comment_delete'])->name('web.single.post.comment.delete');
 route::post('/subscriber' , [subscriberController::class , 'subscriber'])->name('subscriber');
+route::post('/contact/insert' , [FrontviewController::class , 'web_contact_insert'])->name('web.contact.insert');
 
 
 
