@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController, WebSearchController};
+use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController, WebBloggerLogRegisController, WebSearchController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -30,6 +30,8 @@ route::get('/' , [FrontviewController::class , 'index'])->name('index');
 route::get('/blog' , [FrontviewController::class , 'web_blog'])->name('web.blog');
 route::get('/search' , [WebSearchController::class , 'web_search'])->name('web.search');
 route::get('/contact' , [FrontviewController::class , 'web_contact'])->name('web.contact');
+route::get('/blog/login' , [WebBloggerLogRegisController::class , 'web_login'])->name('web.login');
+route::get('/blog/register' , [WebBloggerLogRegisController::class , 'web_register'])->name('web.register');
 
 // category and blog related
 route::get('/category/{slug}/{id}' , [FrontviewController::class , 'web_category'])->name('web.category');
@@ -38,6 +40,8 @@ route::post('/singlepost/comment/{id}' , [SinglePostController::class , 'single_
 route::post('/singlepost/comment/delete/{id}' , [SinglePostController::class , 'single_post_comment_delete'])->name('web.single.post.comment.delete');
 route::post('/subscriber' , [subscriberController::class , 'subscriber'])->name('subscriber');
 route::post('/contact/insert' , [FrontviewController::class , 'web_contact_insert'])->name('web.contact.insert');
+route::post('/blog/login/post' , [WebBloggerLogRegisController::class , 'web_login_post'])->name('web.login.post');
+route::post('/blog/register/post' , [WebBloggerLogRegisController::class , 'web_register_post'])->name('web.register.post');
 
 
 

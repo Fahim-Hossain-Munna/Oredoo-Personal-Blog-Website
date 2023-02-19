@@ -150,11 +150,7 @@
                                     <!--comment1-->
                                     @forelse ($show_comments as $comment)
                                         <li class="comment-item pt-3 pb-3">
-                                            @auth
-                                                <img src="{{ asset('profile_image_user') }}/{{ auth()->user()->user_photo }}" alt="">
-                                                @else
-                                                <img src="{{ asset('user_default_picture/default.jpg') }}" alt="">
-                                            @endauth
+                                            <img src="{{ Avatar::create( $comment->name)->toBase64() }}" />
                                             <div class="content">
                                                 <div class="meta">
                                                     <ul class="list-inline">

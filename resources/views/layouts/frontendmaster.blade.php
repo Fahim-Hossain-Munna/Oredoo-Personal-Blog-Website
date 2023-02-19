@@ -87,9 +87,23 @@
                         <i class="las la-search"></i>
                     </div>
                     <!--button-subscribe-->
+                    @guest
                     <div class="botton-sub">
-                        <a href="signup.html" class="btn-subscribe">Sign Up</a>
+                        <a href="{{ route('web.login') }}" class="btn-subscribe">Sign Up</a>
                     </div>
+                    @else
+                    <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                        @if (auth()->user()->user_photo == 'default.jpg')
+                        <img src="{{ asset('user_default_picture') }}/{{ auth()->user()->user_photo }}" alt=""style="width: 50px; height:50px; border-radius: 25px;">
+                        @else
+                        <img src="{{ asset('profile_image_user') }}/{{ auth()->user()->user_photo }}" alt=""style="width: 50px; height:50px; border-radius: 25px;">
+                        @endif
+                        <div class="header-info m-2" style="display: inline-block;">
+                            <span class="text-black"><strong>{{ auth()->user()->name }}</strong></span>
+                        </div>
+                    </a>
+                    @endguest
+
                     <!--navbar-toggler-->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav"
                         aria-expanded="false" aria-label="Toggle navigation">
