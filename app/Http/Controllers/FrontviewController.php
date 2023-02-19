@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blogpost;
 use App\Models\Category;
+use App\Models\GuestContactMessage;
 use Illuminate\Http\Request;
 
 class FrontviewController extends Controller
@@ -28,6 +29,17 @@ class FrontviewController extends Controller
         return view('frontend.contact.index');
     }
     public function web_contact_insert(Request $request){
-        return $request;
+         $request->validate([
+            "*" => "required",
+         ]);
+         GuestContactMessage::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'created_at' => now(),
+         ]);
+
+         return back()->with('message_send','Thanks for filling out our form "Admin - Oredoo Personal Blogsite"');
     }
 }

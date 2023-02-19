@@ -31,33 +31,49 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="contact-info">
-                            <h3>feel free to contact us</h3>
-                            <p>If you have a question about anything related to blog business or have something else on your mind, send us an email or send an inquiry through our contact form.</p>
-                        </div>
-                        <!--form-->
-                        <form action="{{ route('web.contact.insert') }}" method="POST" class="form contact_form">
+                        <form action="{{ route('web.contact.insert') }}" method="POST">
                             @csrf
-                            {{-- <div class="alert alert-success contact_msg" style="display: none" role="alert">
-                                Your message was sent successfully.
-                            </div> --}}
-                            <div class="form-group">
-                                <input type="text" name="name"  class="form-control" placeholder="Name*">
+                            <div class="contact-info">
+                                <h3>feel free to contact us</h3>
+                                <p>If you have a question about anything related to blog business or have something else on your mind, send us an email or send an inquiry through our contact form.</p>
                             </div>
-
-                            <div class="form-group">
-                                <input type="email" name="email"  class="form-control" placeholder="Email*">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="text" name="subject" class="form-control" placeholder="Subject*">
-                            </div>
-
-                            <div class="form-group">
-                                <textarea name="message" cols="30" rows="5" class="form-control" placeholder="Message*"></textarea>
-                            </div>
-
-                            <button type="button" class="btn-custom">Send Message</button>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleFormControlInput1" placeholder="John Doe" name="name">
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                              </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                              </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Subject</label>
+                                <input type="text" class="form-control @error('subject') is-invalid @enderror" id="exampleFormControlInput1" placeholder="subject" name="subject">
+                                @error('subject')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                <textarea class="form-control @error('message') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" name="message" placeholder="Message"></textarea>
+                                @error('message')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                              </div>
+                              <button type="submit" class="btn btn-outline-dark">send Message</button>
                         </form>
                     </div>
                 </div>
@@ -65,5 +81,32 @@
         </div>
     </section>
 
+
+@endsection
+
+@section('footer_script')
+
+@if (session('message_send'))
+
+<script>
+    const Toast = Swal.mixin({
+toast: true,
+position: 'top-end',
+showConfirmButton: false,
+timer: 3000,
+timerProgressBar: true,
+didOpen: (toast) => {
+  toast.addEventListener('mouseenter', Swal.stopTimer)
+  toast.addEventListener('mouseleave', Swal.resumeTimer)
+}
+})
+
+Toast.fire({
+icon: 'success',
+title: '{{ session('message_send') }}'
+})
+</script>
+
+@endif
 
 @endsection
