@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\InventoryOfBlog;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Image;
 
 class HomeUserBlogPostController extends Controller
@@ -32,7 +33,7 @@ class HomeUserBlogPostController extends Controller
         ]);
 
         if($request->hasFile('blog_title_image')){
-            $new_name_image = auth()->id() . "_" . auth()->user()->name . $request->blog_category_id ."_".now()->format('Y-m-d').".".$request->file('blog_title_image')->getClientOriginalExtension();
+            $new_name_image = auth()->id() . "_" . mt_rand(0,9999) . "_".auth()->user()->name ."_". $request->blog_category_id ."_".now()->format('Y-m-d').".".$request->file('blog_title_image')->getClientOriginalExtension();
             $img = Image::make($request->file('blog_title_image'))->resize(1264, 948);
             $img->save(base_path('public/blog_images/'. $new_name_image), 80);
 
@@ -83,7 +84,7 @@ class HomeUserBlogPostController extends Controller
 
           if($request->hasFile('blog_title_image')){
                 unlink(public_path('blog_images/'. $unlink_image->blog_title_image));
-                $new_name_image = auth()->id() . "_" . auth()->user()->name . $request->blog_category_id ."_".now()->format('Y-m-d').".".$request->file('blog_title_image')->getClientOriginalExtension();
+                $new_name_image = auth()->id() . "_" .mt_rand(0,9999)."_" .auth()->user()->name ."_". $request->blog_category_id ."_".now()->format('Y-m-d').".".$request->file('blog_title_image')->getClientOriginalExtension();
                 $img = Image::make($request->file('blog_title_image'))->resize(1264, 948);
                 $img->save(base_path('public/blog_images/'. $new_name_image), 80);
 

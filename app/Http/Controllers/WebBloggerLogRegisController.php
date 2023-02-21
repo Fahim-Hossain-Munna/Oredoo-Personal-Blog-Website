@@ -19,7 +19,7 @@ class WebBloggerLogRegisController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'rememberme' => 'required',
+            'condition' => 'required',
         ]);
 
         User::insert([
@@ -33,7 +33,19 @@ class WebBloggerLogRegisController extends Controller
         return back()->with('register_success','Thanks'." ".$request->name." ".'Thank you for getting in touch.Your Registration Successful,Please Login');
     }
     public function web_login_post(Request $request){
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'condition' => 'required',
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password],$request->condition)) {
+            return redirect()->route('home');
+        }else{
+            return back()->with('log_failed_error','The provided credentials do not match our records.');
+        }
+
+        if (Auth()->attempt($request->only(['email','password']),$request->condition)) {
             return redirect()->route('home');
         }else{
             return back()->with('log_failed_error','The provided credentials do not match our records.');

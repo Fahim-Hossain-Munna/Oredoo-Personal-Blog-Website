@@ -94,7 +94,7 @@
                                         <li class="post-date"> <span class="line"></span>Publish Date : {{ $blog->blog_publish_date }}</li>
                                     </ul>
                                     <h5 class="entry-title">
-                                        <p>
+                                        <a href="{{ route('web.single.post',$blog->id) }}">
                                             <?php
                                                 $blog_des = strip_tags($blog->blog_short_description);
                                                 $blog_id = $blog->id;
@@ -102,7 +102,7 @@
                                                     $blog_cut = substr($blog_des,0,80);
                                                     $endpoint = strrpos($blog_cut, " ");
                                                     $blog_des = $endpoint?substr($blog_cut,0,$endpoint):substr($blog_cut,0);
-                                                    $blog_des .=".....  <a href='#' class='text-info fw-bold'>Read More</a>";
+                                                    $blog_des .=".....  <span class='text-info fw-bold'>Read More</span>";
                                                 endif;
                                                 echo $blog_des;
                                             ?></p>

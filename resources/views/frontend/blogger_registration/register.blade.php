@@ -36,8 +36,8 @@
                         </div>
                         <div class="sign-controls form-group">
                             <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input @error('rememberme') is-invalid @enderror" id="rememberMe" name="rememberme">
-                            @error('rememberme')
+                            <input type="checkbox" class="custom-control-input @error('condition') is-invalid @enderror" id="rememberMe" name="condition">
+                            @error('condition')
                             <p class="invalid-feedback">
                                 {{ $message }}
                             </p>

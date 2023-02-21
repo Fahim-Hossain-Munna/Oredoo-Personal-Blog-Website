@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blogpost;
 use App\Models\Category;
 use App\Models\GuestContactMessage;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class FrontviewController extends Controller
@@ -27,6 +28,12 @@ class FrontviewController extends Controller
     }
     public function web_contact(){
         return view('frontend.contact.index');
+    }
+    public function web_author(){
+        $categories = Category::all();
+        $blogs = Blogpost::where('user_id',auth()->id())->paginate(5);
+        $tags = Tag::all();
+        return view('frontend.author.index',compact('blogs','categories','tags'));
     }
     public function web_contact_insert(Request $request){
          $request->validate([

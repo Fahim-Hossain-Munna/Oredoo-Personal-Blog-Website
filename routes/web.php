@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController, WebBloggerLogRegisController, WebSearchController};
+use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController, WebBloggerLogRegisController, WebSearchController, WebTagController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -30,6 +30,7 @@ route::get('/' , [FrontviewController::class , 'index'])->name('index');
 route::get('/blog' , [FrontviewController::class , 'web_blog'])->name('web.blog');
 route::get('/search' , [WebSearchController::class , 'web_search'])->name('web.search');
 route::get('/contact' , [FrontviewController::class , 'web_contact'])->name('web.contact');
+route::get('/author' , [FrontviewController::class , 'web_author'])->name('web.author');
 route::get('/blog/login' , [WebBloggerLogRegisController::class , 'web_login'])->name('web.login');
 route::get('/blog/register' , [WebBloggerLogRegisController::class , 'web_register'])->name('web.register');
 
@@ -42,7 +43,7 @@ route::post('/subscriber' , [subscriberController::class , 'subscriber'])->name(
 route::post('/contact/insert' , [FrontviewController::class , 'web_contact_insert'])->name('web.contact.insert');
 route::post('/blog/login/post' , [WebBloggerLogRegisController::class , 'web_login_post'])->name('web.login.post');
 route::post('/blog/register/post' , [WebBloggerLogRegisController::class , 'web_register_post'])->name('web.register.post');
-
+route::get('/tag/{id}' , [WebTagController::class , 'web_tag'])->name('web.tag');
 
 
 
@@ -61,10 +62,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/home/profile/password/update/{id}', [HomeUserProfileController::class, 'profile_password'])->name('profile.password');
     Route::post('/home/profile/picture/update/{id}', [HomeUserProfileController::class, 'profile_picture'])->name('profile.picture');
     Route::post('/home/profile/biodata/update/{id}', [HomeUserProfileController::class, 'profile_biodata'])->name('profile.biodata');
-    // Dashboard user category update controller
-    Route::get('/home/category', [HomeUserCategoryController::class, 'category_index'])->name('category');
-    // Dashboard user tag update controller
-    Route::get('/home/tag', [HomeUserTagController::class, 'tag_index'])->name('tag');
+
+    Route::middleware(['admincheck'])->group(function () {
+        // Dashboard user category update controller
+        Route::get('/home/category', [HomeUserCategoryController::class, 'category_index'])->name('category');
+        // Dashboard user tag update controller
+        Route::get('/home/tag', [HomeUserTagController::class, 'tag_index'])->name('tag');
+
+    });
     // Dashboard user Blog-post update controller
     Route::get('/home/blog/post', [HomeUserBlogPostController::class, 'blog_post_index'])->name('blogpost');
     Route::get('/home/blog/post/insert', [HomeUserBlogPostController::class, 'blog_post_insert'])->name('blogpost.insert');

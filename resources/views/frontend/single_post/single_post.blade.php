@@ -31,7 +31,13 @@
                             <div class="post-single-title">
                                 <h2>{{ $single_post->blog_title }}</h2>
                                 <ul class="entry-meta">
-                                    <li class="post-author-img"><img src="{{ asset('profile_image_user') }}/{{ $single_post->RelationWithUser->user_photo }}" alt=""></li>
+                                    <li class="post-author-img">
+                                        @if ($single_post->RelationWithUser->user_photo == 'default.jpg')
+                                            <img src="{{ asset('user_default_picture') }}/{{ $single_post->RelationWithUser->user_photo }}" alt="">
+                                        @else
+                                            <img src="{{ asset('profile_image_user') }}/{{ $single_post->RelationWithUser->user_photo }}" alt="">
+                                        @endif
+                                    </li>
                                     <li class="post-author"> <a href="author.html">{{ $single_post->RelationWithUser->name }}</a></li>
                                     <li class="entry-cat"> <a href="blog-layout-1.html" class="category-style-1 "> <span class="line"></span> {{ $single_post->RelationWithCategory->category_name }}</a></li>
                                     <li class="post-date"> <span class="line"></span> publish date, {{ $single_post->blog_publish_date }}</li>

@@ -172,15 +172,16 @@
                             <li><a href="{{ route('skills') }}">Add Skills</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="material-symbols-outlined">view_timeline </i>
-                            <span class="nav-text">Category</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('category') }}">Category Insert</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                   @if (auth()->user()->role == 'admin')
+                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                         <i class="material-symbols-outlined">view_timeline </i>
+                             <span class="nav-text">Category</span>
+                         </a>
+                         <ul aria-expanded="false">
+                             <li><a href="{{ route('category') }}">Category Insert</a></li>
+                         </ul>
+                     </li>
+                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="material-symbols-outlined">sell</i>
                             <span class="nav-text">Tag</span>
                         </a>
@@ -188,6 +189,7 @@
                             <li><a href="{{ route('tag') }}">Tag Insert</a></li>
                         </ul>
                     </li>
+                   @endif
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="material-symbols-outlined">compost</i>
                             <span class="nav-text">Blog Post</span>

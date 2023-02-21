@@ -56,11 +56,11 @@
                                     <a class="nav-link" href="about.html"> About </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('web.contact') }}" href="contact.html"> Contact </a>
+                                    <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('web.contact') }}"> Contact </a>
                                 </li>
                                 @auth
                                     <li class="nav-item">
-                                        <a class="nav-link" href="author.html"> Authors </a>
+                                        <a class="nav-link {{ Request::is('author') ? 'active' : '' }}" href="{{ route('web.author') }}"> Authors </a>
                                     </li>
                                 @endauth
                             </ul>
@@ -92,15 +92,15 @@
                         <a href="{{ route('web.login') }}" class="btn-subscribe">Sign Up</a>
                     </div>
                     @else
-                    <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                    <a class="nav-link" href="#" data-toggle="dropdown">
                         @if (auth()->user()->user_photo == 'default.jpg')
                         <img src="{{ asset('user_default_picture') }}/{{ auth()->user()->user_photo }}" alt=""style="width: 50px; height:50px; border-radius: 25px;">
                         @else
                         <img src="{{ asset('profile_image_user') }}/{{ auth()->user()->user_photo }}" alt=""style="width: 50px; height:50px; border-radius: 25px;">
                         @endif
-                        <div class="header-info m-2" style="display: inline-block;">
+                        <a class="header-info" style="display: inline-block;" href="{{ route('home') }}">
                             <span class="text-black"><strong>{{ auth()->user()->name }}</strong></span>
-                        </div>
+                        </a>
                     </a>
                     @endguest
 

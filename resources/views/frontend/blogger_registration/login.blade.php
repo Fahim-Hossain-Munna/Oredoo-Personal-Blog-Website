@@ -12,15 +12,30 @@
                         <form  action="{{ route('web.login.post') }}" class="sign-form widget-form " method="post">
                             @csrf
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email*" name="email" value="">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email*" name="email" value="">
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password*" name="password" value="">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password*" name="password" value="">
+                                @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="sign-controls form-group">
                                 <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                                <input type="checkbox" class="custom-control-input  @error('condition') is-invalid @enderror" id="remember" name="condition">
+                                @error('condition')
+                                <p class="invalid-feedback">
+                                    {{ $message }}
+                                </p>
+                                @enderror
+                                    <label class="custom-control-label" for="remember">Agree to our terms & conditions</label>
                                 </div>
                                 <a href="#" class="btn-link ">Forgot Password?</a>
                             </div>
