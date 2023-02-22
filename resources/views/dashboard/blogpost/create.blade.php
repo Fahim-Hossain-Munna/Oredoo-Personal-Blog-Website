@@ -45,6 +45,17 @@
                                             @endforelse
                                         </select>
                                     </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Blog Tags</label>
+                                        <div class="col-sm-4 col-6">
+                                            @foreach ($tags as $tag)
+                                                <div class="custom-control custom-checkbox mb-3 checkbox-info">
+                                                    <input type="checkbox" class="custom-control-input" id="tags{{ $tag->id }}" value="{{ $tag->id }}" name="tags[]">
+                                                    <label class="custom-control-label" for="tags{{ $tag->id }}">{{ $tag->tag_name }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     @error('blog_category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

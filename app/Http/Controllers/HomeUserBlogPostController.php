@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Livewire\Bloginventorytag\Inventorytag;
 use App\Models\Blogpost;
 use App\Models\Category;
-use App\Models\InventoryOfBlog;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -20,7 +19,8 @@ class HomeUserBlogPostController extends Controller
     }
     public function blog_post_insert(){
         $categories = Category::latest()->get();
-        return view('dashboard.blogpost.create',compact('categories'));
+        $tags = Tag::latest()->get();
+        return view('dashboard.blogpost.create',compact('categories','tags'));
     }
     public function blog_post_insert_post(Request $request){
         $request->validate([
@@ -37,7 +37,7 @@ class HomeUserBlogPostController extends Controller
             $img = Image::make($request->file('blog_title_image'))->resize(1264, 948);
             $img->save(base_path('public/blog_images/'. $new_name_image), 80);
 
-            Blogpost::insert([
+            $blog_post = Blogpost::create([
                 'user_id' => auth()->id() ,
                 'blog_title' => $request->blog_title ,
                 'blog_category_id' => $request->blog_category_id ,
@@ -47,6 +47,10 @@ class HomeUserBlogPostController extends Controller
                 'blog_publish_date' => $request->blog_publish_date ,
                 'created_at' => now(),
             ]);
+
+            $blog_post->RelationWithTags()->attach($request->tags);
+
+            $blog_post->save();
 
             return back()->with('blog_success' , 'Your Blog Story Insert Successfully Done');
         }
@@ -61,24 +65,36 @@ class HomeUserBlogPostController extends Controller
 
     public function blog_post_details_view($id){
         $only_this_id_details = Blogpost::findOrFail($id);
-        $related_tags = InventoryOfBlog::where('blog_id', $id)->get();
-        return view('dashboard.blogpost.singledetails',compact('only_this_id_details','related_tags'));
+        // $related_tags = InventoryOfBlog::where('blog_id', $id)->get();
+        return view('dashboard.blogpost.singledetails',compact('only_this_id_details'));
     }
     public function blog_post_edit($id){
         $my_blogs = Blogpost::findOrFail($id);
         $categories = Category::latest()->get();
-        return view('dashboard.blogpost.edit',compact('categories','my_blogs'));
+        $tags = Tag::latest()->get();
+        return view('dashboard.blogpost.edit',compact('categories','my_blogs','tags'));
     }
     public function blog_post_update(Request $request, $id){
 
-        Blogpost::findOrFail($id)->update([
-            'blog_title' => $request->blog_title ,
-            'blog_category_id' => $request->blog_category_id ,
-            'blog_short_description' => $request->blog_short_description ,
-            'blog_long_description' => $request->blog_long_description ,
-            'blog_publish_date' => $request->blog_publish_date ,
-            'created_at' => now(),
-          ]);
+        // $blog_post = Blogpost::findOrFail($id)->update([
+        //     'blog_title' => $request->blog_title ,
+        //     'blog_category_id' => $request->blog_category_id ,
+        //     'blog_short_description' => $request->blog_short_description ,
+        //     'blog_long_description' => $request->blog_long_description ,
+        //     'blog_publish_date' => $request->blog_publish_date ,
+        //     'created_at' => now(),
+        //   ]);
+        $blog_post = Blogpost::findOrFail($id);
+
+            $blog_post->blog_title = $request->blog_title;
+            $blog_post->blog_category_id = $request->blog_category_id;
+            $blog_post->blog_short_description = $request->blog_short_description;
+            $blog_post->blog_long_description = $request->blog_long_description;
+            $blog_post->blog_publish_date = $request->blog_publish_date;
+            $blog_post->created_at = now();
+            $blog_post->RelationWithTags()->sync($request->tags);
+
+          $blog_post->save();
 
           $unlink_image = Blogpost::findOrFail($id);
 

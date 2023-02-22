@@ -15,7 +15,8 @@ class FrontviewController extends Controller
         $all_blogs = Blogpost::latest()->paginate(4);
         $categories = Category::all();
         $blogposts = Blogpost::latest()->take(2)->get();
-        return view('frontend.root.index',compact('categories','blogposts','all_blogs','latest_posts'));
+        $tags = Tag::latest()->take(10)->get();
+        return view('frontend.root.index',compact('categories','blogposts','all_blogs','latest_posts','tags'));
     }
     public function web_category($slug,$id){
         $category_name = Category::findOrFail($id);

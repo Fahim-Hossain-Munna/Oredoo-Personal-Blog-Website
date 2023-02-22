@@ -19,4 +19,8 @@ class Blogpost extends Model
     {
         return $this->hasOne(User::class, 'id' , 'user_id');
     }
+    public function RelationWithTags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

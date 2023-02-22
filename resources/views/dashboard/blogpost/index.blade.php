@@ -30,7 +30,6 @@
                             <th>Blog Category</th>
                             {{-- <th>Blog Description</th> --}}
                             <th>Publish Date</th>
-                            <th>Inventory Tag</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -44,7 +43,6 @@
                                 <?php echo $blog->blog_short_description ?>
                              </td> --}}
                              <td>{{ $blog->blog_publish_date }}</td>
-                             <td><div class="d-flex align-items-center"> <a href="{{ route('blogpost.inventory.tag' , $blog->id) }}" class="btn btn-info btn-sm">add tag</a> </div></td>
                              <td>
                                  <div class="d-flex">
                                      <a href="{{ route('blogpost.details',$blog->id) }}" class="btn btn-info shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>

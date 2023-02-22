@@ -60,9 +60,9 @@
                                 <div class="tags">
                                     <p>Tags:</p>
                                     <ul class="list-inline">
-                                        @forelse ($tags as $tag)
+                                        @forelse ($single_post->RelationWithTags as $tag)
                                             <li >
-                                                <a href="#">{{ $tag->RelationWithTag->tag_name }}</a>
+                                                <a href="{{ route('web.tag',$tag->id) }}">{{ $tag->tag_name }}</a>
                                             </li>
                                         @empty
                                         <li >

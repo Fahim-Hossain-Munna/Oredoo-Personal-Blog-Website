@@ -251,42 +251,15 @@
                                 </div>
                                 <div class="widget-tags">
                                     <ul class="list-inline">
-                                        <li>
-                                            <a href="#">Travel</a>
+                                       @forelse ($tags as $tag)
+                                         <li>
+                                             <a href="{{ route('web.tag',$tag->id) }}">{{ $tag->tag_name }}</a>
+                                         </li>
+                                       @empty
+                                       <li>
+                                        <a href="#">No Tag Found</a>
                                         </li>
-                                        <li>
-                                            <a href="#">Nature</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">tips</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">forest</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">beach</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">fashion</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">livestyle</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">healty</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">food</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">interior</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">branding</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">web</a>
-                                        </li>
+                                       @endforelse
                                     </ul>
                                 </div>
                             </div>
