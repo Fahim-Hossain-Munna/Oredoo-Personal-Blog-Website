@@ -6,6 +6,28 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-8 m-auto">
+                    <div class="mb-4 d-flex justify-content-end">
+                        <ul class="list-inline">
+
+                            <li>
+                                <p class="text-dark fw-bolder fs-1">
+                                    Login With :
+                                </p>
+                            </li>
+                            <li>
+                                <a href="{{ route('github.redirect') }}" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fab fa-github"></i>
+                                    Github
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn btn-outline-info btn-sm">
+                                    <i class="fab fa-linkedin"></i>
+                                    linkedin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="login-content">
                         <h4>Login</h4>
                         <p></p>

@@ -14,7 +14,7 @@ class FrontviewController extends Controller
         $latest_posts = Blogpost::inRandomOrder()->limit(4)->get();
         $all_blogs = Blogpost::latest()->paginate(4);
         $categories = Category::all();
-        $blogposts = Blogpost::latest()->take(2)->get();
+        $blogposts = Blogpost::inRandomOrder()->limit(5)->get();
         $tags = Tag::latest()->take(10)->get();
         return view('frontend.root.index',compact('categories','blogposts','all_blogs','latest_posts','tags'));
     }

@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\{FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, subscriberController, WebBloggerLogRegisController, WebSearchController, WebTagController};
+use App\Http\Controllers\{ContactInboxController, FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, SocialiteLoginController, subscriberController, WebBloggerLogRegisController, WebSearchController, WebTagController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,7 @@ use Illuminate\Support\Facades\Auth;
 
 //  registration route off code ... user can't register a admin account
 Auth::routes(['register' => false]);
+
 
 // front view and mannagement part
 route::get('/' , [FrontviewController::class , 'index'])->name('index');
@@ -47,8 +50,7 @@ route::get('/tag/{id}' , [WebTagController::class , 'web_tag'])->name('web.tag')
 
 
 
-Route::middleware(['auth'])->group(function () {
-
+Route::middleware(['auth','verified'])->group(function () {
     // Dashboard control and mannagement part
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     // Dashboard to webpage view part
@@ -68,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/home/category', [HomeUserCategoryController::class, 'category_index'])->name('category');
         // Dashboard user tag update controller
         Route::get('/home/tag', [HomeUserTagController::class, 'tag_index'])->name('tag');
+        Route::get('/website/contact/messages', [ContactInboxController::class, 'contact_message'])->name('contact.inbox');
+        Route::post('/website/contact/messages/{id}', [ContactInboxController::class, 'contact_message_mail_send'])->name('contact.inbox.mail');
+        Route::post('/website/contact/messages/delete/{id}', [ContactInboxController::class, 'contact_message_mail_delete'])->name('contact.inbox.mail.delete');
 
     });
     // Dashboard user Blog-post update controller
@@ -80,3 +85,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/blog/inventory/tag/add/{id}', [HomeUserBlogPostController::class, 'blog_post_add_tag'])->name('blogpost.inventory.tag');
     Route::post('/home/blog/delete/{id}', [HomeUserBlogPostController::class, 'blog_delete'])->name('blogpost.delete');
 });
+
+// email verification all routes
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+// socialite login route
+
+Route::get('/github/redirect', [SocialiteLoginController::class, 'github_redirect'])->name('github.redirect');
+Route::get('/github/callback', [SocialiteLoginController::class, 'github_callback'])->name('github.callback');
