@@ -27,6 +27,30 @@ class SocialiteLoginController extends Controller
             ]);
 
             Auth::login($newUser);
+            return redirect()->route('home');
+        }
+    }
+
+    // google
+    public function google_redirect(){
+        return Socialite::driver('google')->redirect();
+    }
+    public function google_callback(){
+        $user = Socialite::driver('google')->user();
+        if (Auth::attempt(['email' => $user->getEmail(), 'password' => 'google_login'])) {
+            return redirect()->route('home');
+        }else{
+            $newUser =User::updateOrCreate([
+                'name' =>$user->getName(),
+                'email' =>$user->getEmail(),
+                'password' => bcrypt('google_login'),
+                'role' =>'blogger',
+                'email_verified_at' => now(),
+                'created_at' => now(),
+            ]);
+
+            Auth::login($newUser);
+            return redirect()->route('home');
         }
     }
 }

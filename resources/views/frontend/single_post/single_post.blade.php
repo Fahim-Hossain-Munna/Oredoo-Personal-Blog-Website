@@ -75,30 +75,26 @@
                                     <p>Share on :</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <a href="#">
+                                            <a id="facebook_shere">
                                                 <i class="fab fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <i class="fab fa-instagram"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
+                                            <a href="#" id="twit_shere">
                                                 <i class="fab fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" >
-                                                <i class="fab fa-youtube"></i>
+                                            <a id="linkedin_shere">
+                                                <i class="fab fa-linkedin"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" >
+                                            <a id="pinterest_shere">
                                                 <i class="fab fa-pinterest"></i>
                                             </a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -108,14 +104,18 @@
                                 <div class="authors-info">
                                     <div class="image">
                                         <a href="#" class="image">
+                                            @if ($single_post->RelationWithUser->user_photo == 'default.jpg')
+                                            <img src="{{ asset('user_default_picture') }}/{{ $single_post->RelationWithUser->user_photo }}" alt="">
+                                            @else
                                             <img src="{{ asset('profile_image_user') }}/{{ $single_post->RelationWithUser->user_photo }}" alt="">
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="content">
                                         <h4>{{ $single_post->RelationWithUser->name }}</h4>
                                         <p> {{ $single_post->RelationWithUser->about_user }} </p>
                                         <div class="social-media">
-                                            <ul class="list-inline">
+                                            {{-- <ul class="list-inline">
                                                 <li>
                                                     <a href="#">
                                                         <i class="fab fa-facebook"></i>
@@ -133,7 +133,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="#" >
-                                                        <i class="fab fa-youtube"></i>
+                                                        <i class="fab fa-linkedin"></i>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -141,7 +141,7 @@
                                                         <i class="fab fa-pinterest"></i>
                                                     </a>
                                                 </li>
-                                            </ul>
+                                            </ul> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -290,5 +290,23 @@ title: '{{ session('comment_delete') }}'
 </script>
 
 @endif
+
+
+{{-- for social share --}}
+<script>
+
+    const facebook_shere = document.getElementById('facebook_shere');
+    const twiter_shere = document.getElementById('twit_shere');
+    const linkedin_shere = document.getElementById('linkedin_shere');
+    const pinterest_shere = document.getElementById('pinterest_shere');
+
+    let postUrl= encodeURI(document.location.href);
+    let postTitle = encodeURI('{{ $single_post->blog_title }}');
+
+    facebook_shere.setAttribute('href',`https://www.facebook.com/sharer.php?u=${postUrl}`);
+    twiter_shere.setAttribute('href',`https://twitter.com/share?url=${postUrl}&text=${postTitle}`);
+    linkedin_shere.setAttribute('href',`https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`);
+    pinterest_shere.setAttribute('href',`https://pinterest.com/pin/create/bookmarklet/?url=${postUrl}&description=${postTitle}`);
+</script>
 
 @endsection

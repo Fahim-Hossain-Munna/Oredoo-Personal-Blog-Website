@@ -21,9 +21,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-outline-info btn-sm">
-                                    <i class="fab fa-linkedin"></i>
-                                    linkedin
+                                <a href="{{ route('google.redirect') }}" class="btn btn-outline-danger btn-sm">
+                                    <i class="fab fa-google"></i>
+                                    Google
                                 </a>
                             </li>
                         </ul>

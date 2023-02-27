@@ -226,8 +226,8 @@
                                         </div>
 
                                         <div class="item color-instagram">
-                                            <a href="#"><i class="fab fa-instagram"></i></a>
-                                            <p>instagram</p>
+                                            <a href="#"><i class="far fa-envelope"></i></a>
+                                            <p>Gmail</p>
                                         </div>
 
                                         <div class="item color-twitter">
@@ -236,8 +236,8 @@
                                         </div>
 
                                         <div class="item color-youtube">
-                                            <a href="#"><i class="fab fa-youtube"></i></a>
-                                            <p>Youtube</p>
+                                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                                            <p>Linkedin</p>
                                         </div>
                                     </div>
                                 </div>

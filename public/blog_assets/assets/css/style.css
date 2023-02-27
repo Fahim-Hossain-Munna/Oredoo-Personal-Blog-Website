@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&amp;display=swap");
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&amp;display=swap");
 /* -----------------------------------------------
-				CSS Styles 
+				CSS Styles
 --------------------------------------------------
 
     Template Name: Oredoo - Personal Blog HTML Template
-    
+
 --------------------------------------------------
 
 Table of Content
@@ -21,10 +21,10 @@ Table of Content
     - Blog homes
     - Blog layouts
     - About
-    - Contact 
+    - Contact
     - Footer
     - Shop
-	  - Preloader 
+	  - Preloader
     - Responsive
     - Dark
 
@@ -1035,14 +1035,14 @@ ul {
   background-color: #3b5998;
 }
 
-.fa-instagram,
+.fa-envelope,
 .color-instagram {
-  background-color: #c32aa3;
+  background-color: #a71930;
 }
 
-.fa-youtube,
+.fa-linkedin,
 .color-youtube {
-  background-color: #e52d27;
+  background-color: #0077b5;
 }
 
 .fa-twitter,
@@ -4548,7 +4548,7 @@ input:checked + .slider:before {
 }
 
 /* -----------------------------
-		 Preloader 
+		 Preloader
 --------------------------------- */
 .loader {
   background-color: #ffffff;
@@ -4594,7 +4594,7 @@ input:checked + .slider:before {
 }
 
 /* ------------------------------
-		 Responsive 
+		 Responsive
 ------------------------------ */
 @media screen and (max-width: 1200px) {
   .blog-creative {
@@ -4985,7 +4985,7 @@ input:checked + .slider:before {
     display: none;
   }
   .instagram-list {
-  
+
         grid-template-columns: repeat(3, 1fr);
     -ms-grid-rows: auto auto;
         grid-template-rows: auto auto;

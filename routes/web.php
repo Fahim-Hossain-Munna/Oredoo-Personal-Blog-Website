@@ -104,3 +104,5 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/github/redirect', [SocialiteLoginController::class, 'github_redirect'])->name('github.redirect');
 Route::get('/github/callback', [SocialiteLoginController::class, 'github_callback'])->name('github.callback');
+Route::get('/google/redirect', [SocialiteLoginController::class, 'google_redirect'])->name('google.redirect');
+Route::get('/google/callback', [SocialiteLoginController::class, 'google_callback'])->name('google.callback');
