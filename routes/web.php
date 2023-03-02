@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ContactInboxController, FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, SocialiteLoginController, subscriberController, WebBloggerLogRegisController, WebSearchController, WebTagController};
+use App\Http\Controllers\{ContactInboxController, FrontviewController , HomeController , HomeUserBlogPostController, HomeUserCategoryController, HomeUserProfileController, HomeUserTagController, SinglePostController, SocialiteLoginController, subscriberController, UsersManageController, WebBloggerLogRegisController, WebSearchController, WebTagController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -68,6 +68,9 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::middleware(['admincheck'])->group(function () {
         // Dashboard user category update controller
         Route::get('/home/category', [HomeUserCategoryController::class, 'category_index'])->name('category');
+        Route::get('/home/users', [UsersManageController::class, 'user_index'])->name('users');
+        Route::post('/home/users/search', [UsersManageController::class, 'user_search_index'])->name('users.search');
+        Route::post('/home/users/delete/{id}', [UsersManageController::class, 'user_delete_index'])->name('users.delete');
         // Dashboard user tag update controller
         Route::get('/home/tag', [HomeUserTagController::class, 'tag_index'])->name('tag');
         Route::get('/website/contact/messages', [ContactInboxController::class, 'contact_message'])->name('contact.inbox');
@@ -102,7 +105,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 // socialite login route
 
+// github
 Route::get('/github/redirect', [SocialiteLoginController::class, 'github_redirect'])->name('github.redirect');
 Route::get('/github/callback', [SocialiteLoginController::class, 'github_callback'])->name('github.callback');
+// google
 Route::get('/google/redirect', [SocialiteLoginController::class, 'google_redirect'])->name('google.redirect');
 Route::get('/google/callback', [SocialiteLoginController::class, 'google_callback'])->name('google.callback');

@@ -74,12 +74,12 @@
 
                                                     @endforelse
                                                 </div>
-                                                <div class="profile-lang  mb-5">
+                                                {{-- <div class="profile-lang  mb-5">
                                                     <h4 class="text-primary mb-2">Language</h4>
 													<a href="javascript:void()" class="text-muted pr-3 f-s-16"><i class="flag-icon flag-icon-us"></i> English</a>
 													<a href="javascript:void()" class="text-muted pr-3 f-s-16"><i class="flag-icon flag-icon-fr"></i> French</a>
                                                     <a href="javascript:void()" class="text-muted pr-3 f-s-16"><i class="flag-icon flag-icon-bd"></i> Bangla</a>
-                                                </div>
+                                                </div> --}}
                                                 <div class="profile-personal-info">
                                                     <h4 class="text-primary mb-4">Personal Information</h4>
                                                     <div class="row mb-2">

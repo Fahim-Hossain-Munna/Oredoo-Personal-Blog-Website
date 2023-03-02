@@ -131,8 +131,8 @@
                             <ul>
                                 <li><a href="{{ route('index') }}">Homepage</a></li>
                                 <li><a href="#">about us</a></li>
-                                <li><a href="#">contact us</a></li>
-                                <li><a href="#">privarcy</a></li>
+                                <li><a href="{{ route('web.contact') }}">contact us</a></li>
+                                <li><a href="{{ route('web.blog') }}">Blogs</a></li>
                             </ul>
                         </div>
                     </div>

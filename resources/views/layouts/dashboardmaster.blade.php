@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <div class="input-group search-area d-xl-inline-flex d-none">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><a href="javascript:void(0)"><i
@@ -85,7 +85,7 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="Search here...">
                                 </div>
-                            </li>
+                            </li> --}}
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
                                     @if (auth()->user()->user_photo == 'default.jpg')
@@ -164,6 +164,13 @@
                             <span class="nav-text">View Webpage</span>
                         </a>
                     </li>
+                    <li><a class="has-arrow ai-icon" href="{{ route('users') }}" aria-expanded="false">
+                        <i class="material-symbols-outlined">
+                            conditions
+                        </i>
+                            <span class="nav-text">User Lists</span>
+                        </a>
+                    </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="flaticon-381-television"></i>
                             <span class="nav-text">Profile</span>
@@ -227,10 +234,10 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="add-menu-sidebar">
+                <a href="{{ route('blogpost.insert') }}" class="add-menu-sidebar">
                     <img src="{{ asset('dashboard_assets') }}/images/calendar.png" alt="" class="mr-3">
                     <p class="	font-w500 mb-0">Make Your Blog Plan Now</p>
-                </div>
+                </a>
                 <div class="copyright">
                     <p><strong>Gymove Blog Admin Dashboard</strong> ©{{ now()->format('Y') }} All Rights Reserved</p>
                     <p>Made with <span class="heart"></span>by
@@ -338,6 +345,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- summernote code --}}
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    {{-- chart.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
     @yield('footer_script')
 
     @livewireScripts
