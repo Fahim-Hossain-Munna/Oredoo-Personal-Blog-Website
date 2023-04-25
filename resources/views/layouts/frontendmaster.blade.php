@@ -53,7 +53,7 @@
                                     <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('web.blog') }}"> Blogs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html"> About </a>
+                                    <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ route('web.about') }}"> About </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('web.contact') }}"> Contact </a>
@@ -130,7 +130,7 @@
                             <h6>Menu</h6>
                             <ul>
                                 <li><a href="{{ route('index') }}">Homepage</a></li>
-                                <li><a href="#">about us</a></li>
+                                <li><a href="{{route('web.about') }}">about us</a></li>
                                 <li><a href="{{ route('web.contact') }}">contact us</a></li>
                                 <li><a href="{{ route('web.blog') }}">Blogs</a></li>
                             </ul>

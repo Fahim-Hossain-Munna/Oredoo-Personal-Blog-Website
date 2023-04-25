@@ -50,4 +50,8 @@ class FrontviewController extends Controller
 
          return back()->with('message_send','Thanks for filling out our form "Admin - Oredoo Personal Blogsite"');
     }
+
+    public function web_about(){
+        return view('frontend.about.index');
+    }
 }

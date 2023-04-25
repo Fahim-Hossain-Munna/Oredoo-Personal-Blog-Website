@@ -32,6 +32,7 @@ Auth::routes(['register' => false]);
 route::get('/' , [FrontviewController::class , 'index'])->name('index');
 route::get('/blog' , [FrontviewController::class , 'web_blog'])->name('web.blog');
 route::get('/search' , [WebSearchController::class , 'web_search'])->name('web.search');
+route::get('/about' , [FrontviewController::class , 'web_about'])->name('web.about');
 route::get('/contact' , [FrontviewController::class , 'web_contact'])->name('web.contact');
 route::get('/author' , [FrontviewController::class , 'web_author'])->name('web.author');
 route::get('/blog/login' , [WebBloggerLogRegisController::class , 'web_login'])->name('web.login');
