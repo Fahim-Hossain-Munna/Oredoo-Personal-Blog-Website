@@ -16,7 +16,12 @@
                             @csrf
                             <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
                         </form>
-                         <p class="links mt-5"><a href="{{ route('index') }}">Home <i class="las la-angle-right"></i></a> Blog</p>
+                        <br>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        <button class="btn btn-danger text-white btn-sm" style="margin-top: 40px !important;"><i class="fas fa-sign-out-alt"></i> LOGOUT</button>
+                        </form>
+                        <p class="links mt-5"><a href="{{ route('index') }}">Home <i class="las la-angle-right"></i></a> Blog</p>
                      </div>
                  </div>
              </div>
